@@ -7,13 +7,15 @@ use Response;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = DB::table('users')->where('status','=','1')->get();
+        $users = DB::table('users')
+                        ->where('status','=','1')
+                        ->get();
         return view('user.index',['users' => $users]);
     }
     /**
@@ -32,30 +34,22 @@ class UserController extends Controller
             $data = $request->all(); 
             $data['create_date'] = date('Y-m-d');
             $data['status'] = 1;
+            $data['password'] = Hash::make($data['password']);            
             DB::table('users')->insert($data);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $user = DB::table('users')
+                    ->where('id', $id)
+                    ->get();
+        return json_encode($user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function edit($id)    
+    {        
+        
     }
 
     /**

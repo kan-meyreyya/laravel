@@ -80,4 +80,42 @@ $(function(){
 			});
 		});
 	}
+
+	$('body').on('click', '.popup', function(e){
+		var content = $('body').find('#myModal');
+		var dataOptions = {
+			target: $(this).data('item'),
+			name: $(this).data('name'),
+			id: $(this).data('id')
+		}
+
+		$('body').find('#myModal .modal-title').html(dataOptions.name);
+
+		if(dataOptions.target == 'new'){
+
+			$(content).find('.password-wrap').show();
+			$(content).find('input[type=text],input[type=email],input[type=password]').val('');
+
+		}else{
+
+			$.ajax({
+				type: 'GET',
+				url: 'user/' + dataOptions.id
+			}).done(function(data){
+				data = JSON.parse(data);
+				SetDataToForm(data['0']);
+			});
+		}
+		
+	});
+
+	function SetDataToForm(data){
+		console.log(data);		
+		var content = $('body').find('#myModal');
+		$(content).find('.password-wrap').hide();
+		$(content).find('#username').val(data.username);
+		$(content).find('#email').val(data.email);
+		$(content).find('[name=role]').val(data.role);
+	}
+
 });

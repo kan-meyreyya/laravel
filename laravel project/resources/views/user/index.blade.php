@@ -20,7 +20,7 @@
   	<section class="content">
   		<div class="box box-primary">
   			<div class="box-header">
-  				<button type="button" data-toggle="modal" data-target="#myModal"" class="btn btn-default pull-left">
+  				<button type="button" data-toggle="modal" data-id="0" data-target="#myModal" data-item="new" data-name="Create New User" class="btn btn-default pull-left popup">
   					<i class="fa fa-plus"></i> Add User
 				</button>
   			</div>
@@ -44,8 +44,12 @@
 										<td>'. $user->role .'</td>
 										<td>'. $user->create_date .'</td>
 										<td>
-											<button type="button" class="btn btn-sm btn-danger">Edit</button>
-											<button type="button" class="btn btn-sm btn-primary">Delete</button>
+											<button type="button" data-item="edit" class="btn btn-sm btn-primary editUser popup" data-name="'. $user->username .'" data-id="'. $user->id .'" data-toggle="modal" data-target="#myModal">
+												<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+											</button>
+											<button type="button" class="btn btn-sm btn-danger deleteUser popup" data-name="'. $user->username .'" data-id="'. $user->id .'">
+												<i class="fa fa-trash" aria-hidden="true"></i> Delete
+											</button>
 										</td>
 									  </tr>';
 							}
@@ -60,7 +64,7 @@
 				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				        			<span aria-hidden="true">&times;</span>
 			        			</button>
-				        		<h4 class="modal-title" id="myModalLabel">Create New User</h4>
+				        		<h4 class="modal-title" id="myModalLabel"></h4>
 				      		</div>
 				      		<div class="modal-body">
 				      			{!! Form::open(['action' => 'UserController@store', 'class' => 'form-horizontal mainForm', 'autocomplet' => 'false', 'onsubmit' => 'return false']) !!}
@@ -76,13 +80,13 @@
 								      		{!! Form::email('email','',['class' => 'form-control', 'placeholder' => 'example@gmail.com']) !!}
 								    	</div>
 								  	</div>								  	
-								  	<div class="form-group">
+								  	<div class="form-group password-wrap">
 								    	{!! Form::label('password','password',['class' => 'col-sm-3 control-label']) !!}
 								    	<div class="col-sm-9">
 								      		{!! Form::password('password',['class' => 'form-control', 'placeholder' => 'Password']) !!}
 								    	</div>
 								  	</div>
-								  	<div class="form-group">
+								  	<div class="form-group password-wrap">
 								    	{!! Form::label('comfirm_password','Confirm Pwd',['class' => 'col-sm-3 control-label']) !!}
 								    	<div class="col-sm-9">
 								      		{!! Form::password('comfirm_password',['class' => 'form-control', 'placeholder' => 'Comfirm Password']) !!}
