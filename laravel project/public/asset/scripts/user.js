@@ -1,5 +1,13 @@
 $(function(){
 
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+		}
+    })
+
+   // GetUserList();
+
 	AddValidationUser();
 
 	function AddValidationUser(){
@@ -71,7 +79,9 @@ $(function(){
 				headers: { 'X-CSRF-Token': form.find('input[name=_token]').val() },
 				data: userData,
 			}).done(function(data){
-				window.location.href = 'user';
+				$('#myModal').on('hide.bs.modal', function(e){
+					window.location.href = 'user';
+				});
 			})
 
 			$('body').on('click', '.saveUser', function(e){
@@ -105,8 +115,30 @@ $(function(){
 				data = JSON.parse(data);
 				SetDataToForm(data['0']);
 			});
-		}
-		
+		}		
+	});
+
+	$('body').on('click', '.deleteUser', function(e){
+		var id = $(this).data('id');
+		var token = $(this).data('token');
+		swal({   
+			title: 'Do you want to delete this user?',   
+			text: 'This user will be delete from database!',   
+			type: 'warning',   
+			showCancelButton: true,   
+			confirmButtonColor: '#DD6B55',   
+			confirmButtonText: 'Yes, delete it!',   
+			closeOnConfirm: false 
+		}, function(){		
+			$.ajax({
+				type: 'DELETE',
+				url: 'user/' + id,
+				data: { '_token' : token }				
+			}).done(function(e){	
+				window.location.href = 'user';
+				swal('Deleted!', '' , 'success');
+			});			
+		});
 	});
 
 	function SetDataToForm(data){
@@ -116,6 +148,23 @@ $(function(){
 		$(content).find('#username').val(data.username);
 		$(content).find('#email').val(data.email);
 		$(content).find('[name=role]').val(data.role);
+	}
+
+	function RequestUserList(callback){
+		$.ajax({
+			type: 'GET',
+			url: 'user'
+		}).done(function(e){
+			if( typeof callback === 'function'){
+				return callback;
+			}
+		});
+	}
+
+	function GetUserList(){
+		RequestUserList(function(data){
+			console.log(data);
+		});
 	}
 
 });

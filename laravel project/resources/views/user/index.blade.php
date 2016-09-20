@@ -7,6 +7,7 @@
   	<link rel="stylesheet" href="<?php echo url('/'); ?>/asset/dist/css/AdminLTE.min.css">
   	<link rel="stylesheet" href="<?php echo url('/'); ?>/asset/dist/css/skins/_all-skins.min.css">
   	<link rel="stylesheet" href="<?php echo url('/'); ?>/asset/bootstrapValidator/css/bootstrapValidator.min.css">
+  	<link rel="stylesheet" href="<?php echo url('/'); ?>/asset/sweetalert/sweetalert.css">
 @stop
 
 @section('main_content')
@@ -47,7 +48,7 @@
 											<button type="button" data-item="edit" class="btn btn-sm btn-primary editUser popup" data-name="'. $user->username .'" data-id="'. $user->id .'" data-toggle="modal" data-target="#myModal">
 												<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
 											</button>
-											<button type="button" class="btn btn-sm btn-danger deleteUser popup" data-name="'. $user->username .'" data-id="'. $user->id .'">
+											<button type="button" class="btn btn-sm btn-danger deleteUser" data-name="'. $user->username .'" data-id="'. $user->id .'"​​​​ data-token="'. csrf_token() .'">
 												<i class="fa fa-trash" aria-hidden="true"></i> Delete
 											</button>
 										</td>
@@ -134,4 +135,5 @@
 	<script src="<?php echo url('/'); ?>/asset/dist/js/demo.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/bootstrapValidator/js/bootstrapValidator.min.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/scripts/user.js"></script>
+	<script src="<?php echo url('/'); ?>/asset/sweetalert/sweetalert.min.js"></script>
 @stop
