@@ -98,7 +98,6 @@ $(function(){
 	}
 
 	function AddValidationUser(url){
-		console.log(url);
 		var form = $('body').find('.mainForm');
 		form.bootstrapValidator({
 			feedbackIcons: {
