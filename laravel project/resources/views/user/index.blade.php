@@ -26,7 +26,7 @@
 				</button>
   			</div>
   			<div class="box-body">
-  				<table class="table table-hover">
+  				<table class="table table-hover userTable">
 					<thead>
 						<tr>
 							<th>UserName</th>
@@ -36,26 +36,7 @@
 							<th>Action</th>
 						</tr>
 					</thead>
-					<tbody>
-						<?php 
-							foreach($users as $user){
-								echo '<tr>
-										<td>'. $user->username .'</td>
-										<td>'. $user->email .'</td>
-										<td>'. $user->role .'</td>
-										<td>'. $user->create_date .'</td>
-										<td>
-											<button type="button" data-item="edit" class="btn btn-sm btn-primary editUser popup" data-name="'. $user->username .'" data-id="'. $user->id .'" data-toggle="modal" data-target="#myModal">
-												<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
-											</button>
-											<button type="button" class="btn btn-sm btn-danger deleteUser" data-name="'. $user->username .'" data-id="'. $user->id .'"​​​​ data-token="'. csrf_token() .'">
-												<i class="fa fa-trash" aria-hidden="true"></i> Delete
-											</button>
-										</td>
-									  </tr>';
-							}
-						?>
-					</tbody>
+					<tbody></tbody>
 				</table>
 
   				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

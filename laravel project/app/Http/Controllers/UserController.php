@@ -12,12 +12,17 @@ use Hash;
 class UserController extends Controller
 {
     public function index()
-    {
-        $users = DB::table('users')
-                        ->where('status','=','1')
-                        ->get();
-        return view('user.index',['users' => $users]);
+    {        
+        return view('user.index');
     }
+
+    public function getList(){
+        $users = DB::table('users')
+                        ->where('status','1')
+                        ->get();
+        return json_encode($users);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -52,24 +57,21 @@ class UserController extends Controller
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $data = $request->all();
+            DB::table('users')
+                ->where('id',$id)
+                ->update([
+                    'username' => $data['username'],
+                    'email' => $data['email'],
+                    'modify_date' => date('Y-m-d'),
+                    'role' => $data['role']
+                ]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         DB::table('users')
