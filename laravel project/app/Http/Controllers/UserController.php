@@ -37,7 +37,7 @@ class UserController extends Controller
     {
         if($request->ajax()){
             $data = $request->all(); 
-            $data['create_date'] = date('Y-m-d');
+            $data['created_at'] = date('Y-m-d H:i:s');
             $data['status'] = 1;
             $data['password'] = Hash::make($data['password']);            
             DB::table('users')->insert($data);
@@ -66,7 +66,7 @@ class UserController extends Controller
                 ->update([
                     'username' => $data['username'],
                     'email' => $data['email'],
-                    'modify_date' => date('Y-m-d'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                     'role' => $data['role']
                 ]);
         }

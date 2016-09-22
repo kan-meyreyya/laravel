@@ -86,7 +86,7 @@ $(function(){
 		var element = '';
 		if((user != null) && (user != undefined)){
 			$.each(user, function(i,v){
-				element += '<tr><td>'+ v.username +'</td><td>'+ v.email +'</td><td>'+ v.role +'</td><td>'+ v.create_date +'</td>' +
+				element += '<tr><td>'+ v.username +'</td><td>'+ v.email +'</td><td>'+ v.role +'</td><td>'+ v.created_at.toString('dd-mm-Y') +'</td>' +
 						  '<td><button type="button" data-item="edit" class="btn btn-sm btn-primary editUser popup" data-name="'+ v.username +'" data-id="'+ v.id +'" data-toggle="modal" data-target="#myModal">' +
 						  '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>&nbsp;' +
 						  '<button type="button" class="btn btn-sm btn-danger deleteUser" data-name="'+ v.username +'" data-id="'+ v.id +'"​​​​>' +

@@ -1,9 +1,22 @@
 <?php
 namespace App;
-use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+
+class User extends Model implements Authenticatable
 {
-    protected $table = 'users';
-    protected $fillable = ['username', 'password', 'email', 'create_date', 'modify_date'];
+	use AuthenticableTrait;
+
+	protected $table = 'users';
+	public $timestamps = false;
+
+    protected $fillable = [
+    	'username', 'password', 'email', 'role', 'status', 'created_at'
+	];
+
+	protected $hidden = [
+	    'password', 'remember_token',
+	];
 }

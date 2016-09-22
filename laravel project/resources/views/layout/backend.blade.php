@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<meta id="token" name="token" content="{!! csrf_token() !!}">
+  	<meta id="token" name="token" content="{{ csrf_token() }}"">
   	<title>AdminLTE 2 | Dashboard</title>
   	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -175,29 +175,19 @@
             				</ul>
           				</li>
           				<li class="dropdown user user-menu">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-				              <span class="hidden-xs">Alexander Pierce</span>
+				            <a href="#" class="dropdown-toggle" data-toggle="dropdown">				              
+				              <span class="hidden-xs">{{ Auth::user()->username }}</span>
 				            </a>
-            				<ul class="dropdown-menu">
-			              		<li class="user-header">
-			                		<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-			                		<p>Alexander Pierce - Web Developer<small>Member since Nov. 2012</small></p>
-			              		</li>
-				              	<li class="user-body">
-				                	<div class="row">
-				                  		<div class="col-xs-4 text-center"><a href="#">Followers</a></div>
-				                  		<div class="col-xs-4 text-center"><a href="#">Sales</a></div>
-				                  		<div class="col-xs-4 text-center"><a href="#">Friends</a></div>
-				                	</div>
-				              	</li>
-				              	<li class="user-footer">
-				                	<div class="pull-left"><a href="#" class="btn btn-default btn-flat">Profile</a></div>
-				                	<div class="pull-right"><a href="#" class="btn btn-default btn-flat">Sign out</a></div>
-				              	</li>
-            				</ul>
           				</li>
-			          	<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
+			          	<li>
+			          		<a href="{{ url('/logout') }}" 
+			          			onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+			          			<i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+		          			</a>
+		          			<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+		          		</li>
         			</ul>
       			</div>
     		</nav>
