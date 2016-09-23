@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="<?php echo url('/'); ?>/asset/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="<?php echo url('/'); ?>/asset/dist/css/skins/_all-skins.min.css">
-@stop
+@endsection
 
 @section('main_content')
 
@@ -63,7 +63,7 @@
     </div>
   </section>	
 
-@stop
+@endsection
 
 @section('script')
 	<script src="<?php echo url('/'); ?>/asset/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -75,4 +75,4 @@
 	<script src="<?php echo url('/'); ?>/asset/dist/js/app.min.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/dist/js/pages/dashboard.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/dist/js/demo.js"></script>
-@stop
+@endsection

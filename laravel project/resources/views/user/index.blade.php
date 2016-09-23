@@ -8,7 +8,7 @@
   	<link rel="stylesheet" href="<?php echo url('/'); ?>/asset/dist/css/skins/_all-skins.min.css">
   	<link rel="stylesheet" href="<?php echo url('/'); ?>/asset/bootstrapValidator/css/bootstrapValidator.min.css">
   	<link rel="stylesheet" href="<?php echo url('/'); ?>/asset/sweetalert/sweetalert.css">
-@stop
+@endsection
 
 @section('main_content')
 	<section class="content-header">
@@ -100,9 +100,10 @@
 				  	</div>
 				</div>
   			</div>
+  			<div class="overlay" style="display:none;"><i class="fa fa-refresh fa-spin"></i></div>
   		</div>
   	</section>
-@stop
+@endsection
 
 @section('script')
 	<script src="<?php echo url('/'); ?>/asset/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -117,4 +118,4 @@
 	<script src="<?php echo url('/'); ?>/asset/bootstrapValidator/js/bootstrapValidator.min.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/scripts/user.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/sweetalert/sweetalert.min.js"></script>
-@stop
+@endsection

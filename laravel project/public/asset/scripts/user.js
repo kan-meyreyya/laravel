@@ -1,9 +1,11 @@
-$(function(){
+$(function(){	
 	var dataObject = {
 		url: null,
 		type: null
 	}
 
+	$('body').find('.overlay').css('display','block');
+	
 	$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -151,8 +153,7 @@ $(function(){
 	                }
 	            }
 	        }
-		}).on('success.form.bv', function (e){
-			e.preventDefault();
+		}).on('success.form.bv', function (e){			
 			var userData = {
 				username: form.find('#username').val(),
 				email: form.find('#email').val(),
@@ -167,7 +168,7 @@ $(function(){
 				data: userData,
 			}).done(function(data){
 				$('#myModal').modal('hide');
-				GetUserList();
+				window.location.href = 'user';
 			})
 
 			$('body').on('click', '.saveUser', function(e){
@@ -185,6 +186,8 @@ $(function(){
 			if( typeof callback === 'function'){
 				callback(JSON.parse(data));
 			}
+		}).complete(function(data){
+			$('body').find('.overlay').css('display','none');
 		});
 	}
 

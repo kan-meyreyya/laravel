@@ -222,7 +222,7 @@
 		        		</a>
 	        		</li>
 			        <li class="treeview">
-			        	<a href="<?= URL::to('admin/media') ?>">
+			        	<a href="<?= URL::to('media') ?>">
 			        		<i class="fa fa-file-image-o" aria-hidden="true"></i><span>Media</span>
 		        		</a>
 	        		</li>

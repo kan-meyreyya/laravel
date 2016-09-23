@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     public function index()
     {        
         return view('user.index');
@@ -35,12 +40,16 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        if($request->ajax()){
-            $data = $request->all(); 
-            $data['created_at'] = date('Y-m-d H:i:s');
-            $data['status'] = 1;
-            $data['password'] = Hash::make($data['password']);            
-            DB::table('users')->insert($data);
+        if(Auth::check()){
+            if($request->ajax()){
+                $data = $request->all(); 
+                $data['created_at'] = date('Y-m-d H:i:s');
+                $data['status'] = 1;
+                $data['password'] = Hash::make($data['password']);            
+                DB::table('users')->insert($data);
+            }else{
+                return redirect()->guest('auth/login');
+            }
         }
     }
 
@@ -59,16 +68,20 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        if($request->ajax()){
-            $data = $request->all();
-            DB::table('users')
-                ->where('id',$id)
-                ->update([
-                    'username' => $data['username'],
-                    'email' => $data['email'],
-                    'updated_at' => date('Y-m-d H:i:s'),
-                    'role' => $data['role']
-                ]);
+        if(Auth::check()){
+            if($request->ajax()){
+                $data = $request->all();
+                DB::table('users')
+                    ->where('id',$id)
+                    ->update([
+                        'username' => $data['username'],
+                        'email' => $data['email'],
+                        'updated_at' => date('Y-m-d H:i:s'),
+                        'role' => $data['role']
+                    ]);
+            }else{
+                return redirect()->guest('auth/login');
+            }           
         }
     }
 
