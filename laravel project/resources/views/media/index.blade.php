@@ -9,6 +9,7 @@
   	<link rel="stylesheet" href="<?php echo url('/'); ?>/asset/bootstrapValidator/css/bootstrapValidator.min.css">
   	<link rel="stylesheet" href="<?php echo url('/'); ?>/asset/sweetalert/sweetalert.css">
   	<link rel="stylesheet" href="<?php echo url('/'); ?>/css/dropzone.css">
+  	<link rel="stylesheet" type="text/css" href="<?php echo url('/'); ?>/asset/plugins/datatables/dataTables.bootstrap.css"/>
 @endsection
 
 @section('main_content')
@@ -24,10 +25,41 @@
   			<div class="box-header">
   				<h2 class="pull-left">Upload file or image</h2>
   			</div>
-  			<div class="box-body">
-  				{!! Form::open(['action' => 'MediaController@store', 'class' => 'dropzone', 'id' => 'my-dropzone', 'enctype' => 'multipart/form-data']) !!}
-  				{!! Form::close() !!}  			
-  			</div>  				
+  			<div class="box-body">  							
+				<div class="nav-tabs-custom">
+            		<ul class="nav nav-tabs">
+              			<li class="active">
+              				<a href="#tab_1-1" data-toggle="tab" aria-expanded="true">Upload Image</a>
+          				</li>
+              			<li class="">
+              				<a href="#tab_2-2" data-toggle="tab" aria-expanded="false">Image List</a>
+          				</li>              			            
+            		</ul>
+	            	<div class="tab-content">
+	              		<div class="tab-pane active" id="tab_1-1">
+	                		{!! Form::open(['action' => 'MediaController@store', 'class' => 'dropzone', 'id' => 'my-dropzone', 'enctype' => 'multipart/form-data']) !!}
+	  						{!! Form::close() !!}
+	              		</div>
+		              	<div class="tab-pane" id="tab_2-2">
+		              		<button type="button" class="btn btn-sm btn-default pull-right" id="imgRefresh">
+		              			<i class="fa fa-refresh" aria-hidden="true"></i> Refresh
+	              			</button>
+	              			<div class="clearfix"></div>							
+							<table id="imageTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<td>Image</td>
+										<td>Name</td>
+										<td>File</td>
+										<td>Action</td>
+									</tr>
+								</thead>								
+							</table>
+		              	</div>
+	            	</div>
+          		</div>
+  			</div> 
+  			<div class="overlay" style="display:none;"><i class="fa fa-refresh fa-spin"></i></div> 				
   		</div>  		
   	</section>
 @endsection
@@ -43,8 +75,8 @@
 	<script src="<?php echo url('/'); ?>/asset/dist/js/pages/dashboard.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/dist/js/demo.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/bootstrapValidator/js/bootstrapValidator.min.js"></script>
-	<script src="<?php echo url('/'); ?>/asset/scripts/user.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/sweetalert/sweetalert.min.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/dropzone/dropzone.min.js"></script>
+	<script src="<?php echo url('/'); ?>/asset/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="<?php echo url('/'); ?>/asset/scripts/media.js"></script>
 @endsection

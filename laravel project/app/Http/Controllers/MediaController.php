@@ -13,7 +13,7 @@ class MediaController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index()    
     {
         return view('media.index');
     }
@@ -98,5 +98,10 @@ class MediaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function imageList(){
+        $images = DB::table('medias')->get();
+        return json_encode($images);
     }
 }

@@ -14,4 +14,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('imageList','MediaController@imageList');
+
 Route::resource('media','MediaController');
